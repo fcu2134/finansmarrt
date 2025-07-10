@@ -61,7 +61,9 @@ Una vez activado el entorno virtual y con dependencias instaladas:
 
 o bien ejecutar el setup,bat
 
-
+ si te sale esto lo haces noma 
+[notice] A new release of pip is available: 24.0 -> 25.1.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
 
 ----------------------------------
 
@@ -69,4 +71,13 @@ funcionamiento del proyecto
 
 ----------------------------------
 
--basicamente es un gestor de finanzas donde el usuario podra agregar ingresos e egresos que va consumiendo y generando , separandolo por categorias(categoriza en un grupo lo que pertenece cada ingreso e egreso),transacciones(donde puede agregar los gastos y ingresos que reciba o haga),editar lo que es el tema de transaccion y categoria , mostrar cada egreso del mes en grafico 
+-basicamente es un gestor de finanzas donde el usuario podra agregar ingresos e egresos que va consumiendo y generando , separandolo por categorias(categoriza en un grupo lo que pertenece cada ingreso e egreso),transacciones(donde puede agregar los gastos y ingresos que reciba o haga)
+editar lo que es el tema de transaccion y categoria , mostrar cada egreso del mes en grafico 
+
+--------
+extra  
+-------
+si te da error el tema del bat o la instalacion del requeriments , prueba en la cmd nomral y cuando estes en la cmd, poner cd y la ruta del proyecto,
+una ves dentro creas el entorno virtual con: python -m venv venv   una vez hecho deberia salirte la carpeta , si te sale prueba el activate (\venv\Scripts\activate)
+si no funciona entonces venv\Scripts\activate.bat .
+si te sale (venv) C:\Users\ entonces ahi instalas los requerimientos 
