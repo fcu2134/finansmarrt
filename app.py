@@ -1,4 +1,4 @@
-# app.py (versión en español)
+
 
 from flask import Flask, render_template, redirect, url_for, flash, request
 from extensiones import db
