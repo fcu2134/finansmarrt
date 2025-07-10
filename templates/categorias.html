@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mis Categorías</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/categoria.css') }}" rel="stylesheet" />
+
+</head>
+<body>
+ <!--navbaaar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" href="{{ url_for('panel') }}">FinanSmart</a>
+    <div class="ms-auto">
+      <a href="{{ url_for('cerrar_sesion') }}" class="btn btn-outline-light">Cerrar sesión</a>
+    </div>
+  </div>
+</nav>
+ <!--alertas de error y exito -->
+<div class="container mt-5" style="max-width: 600px;">
+  <h2 class="mb-4 text-center">Gestionar Categorías</h2>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for categoria, message in messages %}
+        <div 
+          class="alert {% if categoria == 'error' %}alert-danger{% elif category == 'success' %}alert-success{% else %}alert-info{% endif %}" 
+          role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+ <!--todo el formulario pa la creacion de las categorias(categoriza lo que ingresa y sale )-->
+<form method="POST" action="{{ url_for('categorias') }}">
+  {{ form.hidden_tag() }}
+  <div class="input-group mb-3">
+    {{ form.nombre(class="form-control", placeholder="Nueva categoría") }}
+    <button type="submit" class="btn btn-primary">{{ form.enviar.label.text }}</button>
+  </div>
+</form>
+  <ul class="list-group">
+   {% for cat in categorias %}
+  <li class="list-group-item d-flex justify-content-between align-items-center mb-2">
+    <span>{{ cat.nombre }}</span>  
+    <div class="btn-group btn-group-sm" role="group" aria-label="Acciones categoría">
+      <a href="{{ url_for('editar_categoria', id=cat.id) }}" class="btn btn-outline-secondary">Editar</a>
+      <form action="{{ url_for('eliminar_categoria', id=cat.id) }}" method="POST" style="display:inline;">
+        <button type="submit" class="btn btn-outline-danger" onclick="return confirm('¿Seguro que quieres eliminar esta categoría?');">Eliminar</button>
+      </form>
+    </div>
+  </li>
+{% else %}
+  <li class="list-group-item text-center text-muted">No tienes categorías aún.</li>
+{% endfor %}
+
+  </ul>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

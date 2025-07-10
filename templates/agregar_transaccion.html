@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Agregar Transacción - FinanSmart</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="{{ url_for('static', filename='css/agregar_transacciones.css') }}" rel="stylesheet" />
+</head>
+<body>
+  <!--alertasss-->
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for categoria, mensaje in messages %}
+      {% if categoria == 'success' or categoria == 'info' %}
+        <div class="alert alert-{{ categoria }}">
+          {{ mensaje }}
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+{% endwith %}
+
+
+<!--el navbaar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <div class="container">
+    <!--enlaces que uso para hacer referencia la vista-->
+    <a class="navbar-brand" href="{{ url_for('panel') }}">FinanSmart</a>
+    <div>
+      <a href="{{ url_for('panel') }}" class="btn btn-light btn-sm">Volver al Dashboard</a>
+    </div>
+  </div>
+</nav>
+<!--todo el formulario pa agregar la transac-->
+<div class="container mt-5" style="max-width: 500px;">
+  <h2 class="mb-4 text-center">Agregar Transacción</h2>
+<form method="POST" novalidate>
+  {{ form.hidden_tag() }}
+
+  <div class="mb-3">
+    {{ form.monto.label(class="form-label") }}
+    {{ form.monto(class="form-control", placeholder="Monto") }}
+    {% for error in form.monto.errors %}
+      <div class="text-danger">{{ error }}</div>
+    {% endfor %}
+  </div>
+
+  <div class="mb-3">
+    {{ form.tipo.label(class="form-label") }}
+    {{ form.tipo(class="form-select") }}
+    {% for error in form.tipo.errors %}
+      <div class="text-danger">{{ error }}</div>
+    {% endfor %}
+  </div>
+
+  <div class="mb-3">
+    {{ form.categoria.label(class="form-label") }}
+    {{ form.categoria(class="form-select") }}
+    {% for error in form.categoria.errors %}
+      <div class="text-danger">{{ error }}</div>
+    {% endfor %}
+  </div>
+
+  <div class="mb-3">
+    {{ form.fecha.label(class="form-label") }}
+    {{ form.fecha(class="form-control") }}
+    {% for error in form.fecha.errors %}
+      <div class="text-danger">{{ error }}</div>
+    {% endfor %}
+  </div>
+
+  <div class="mb-3">
+    {{ form.descripcion.label(class="form-label") }}
+    {{ form.descripcion(class="form-control", rows="3", placeholder="Descripción (opcional)") }}
+    {% for error in form.descripcion.errors %}
+      <div class="text-danger">{{ error }}</div>
+    {% endfor %}
+  </div>
+
+  <button type="submit" class="btn btn-primary w-100">{{ form.enviar.label.text }}</button>
+</form>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

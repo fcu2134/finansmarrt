@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registro - FinanSmart</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/registro.css') }}">
+</head>
+<body>
+
+  <div class="form-wrapper">
+    <h2>Crea tu propia cuenta!</h2>
+<!--alertas de creacion de usuario-->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for categoria, mensaje in messages %}
+          <div class="alert {{ registro }}">
+            {{ mensaje }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST" novalidate>
+      {{ formulario.hidden_tag() }}
+
+      <div class="input-group">
+        {{ formulario.nombre_usuario.label }}
+        {{ formulario.nombre_usuario(class="form-control", placeholder="Nombre de usuario") }}
+        {% for error in formulario.nombre_usuario.errors %}
+          <div class="error">{{ error }}</div>
+        {% endfor %}
+      </div>
+
+      <div class="input-group">
+        {{ formulario.correo.label }}
+        {{ formulario.correo(class="form-control", placeholder="Correo electrónico") }}
+        {% for error in formulario.correo.errors %}
+          <div class="error">{{ error }}</div>
+        {% endfor %}
+      </div>
+
+      <div class="input-group">
+        {{ formulario.contrasena.label }}
+        {{ formulario.contrasena(class="form-control", placeholder="Contraseña") }}
+        {% for error in formulario.contrasena.errors %}
+          <div class="error">{{ error }}</div>
+        {% endfor %}
+      </div>
+
+      <button type="submit" class="btn-submit">{{ formulario.enviar.label.text }}</button>
+    </form>
+
+    <p class="registro-link">¿Ya tienes cuenta? <a href="{{ url_for('login') }}">Inicia sesión aquí</a></p>
+  </div>
+
+</body>
+</html>

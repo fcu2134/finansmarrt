@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mis Transacciones</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="{{ url_for('static', filename='css/transacciones.css') }}" rel="stylesheet" />
+
+</head>
+<body>
+  <div class="container mt-5">
+    <h2>Mis Transacciones</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Monto</th>
+          <th>Tipo</th>
+          <th>Categoría</th>
+          <th>Fecha</th>
+          <th>Descripción</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for t in transacciones %}
+        <tr>
+          <td>{{ t.monto }}</td>
+          <td>{{ t.tipo }}</td>
+          <td>{{ t.categoria.nombre if t.categoria else 'Sin categoría' }}</td>
+          <td>{{ t.fecha.strftime('%Y-%m-%d') }}</td>
+          <td>{{ t.descripcion }}</td>
+        </tr>
+        {% else %}
+        <tr><td colspan="5" class="text-center">No tienes transacciones.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    <a href="{{ url_for('panel') }}" class="btn btn-primary">Volver al Dashboard</a>
+  </div>
+</body>
+</html>
