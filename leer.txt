@@ -57,7 +57,7 @@ Una vez activado el entorno virtual y con dependencias instaladas:
 ----------------------------------
 📌 Nota:
 - debes eliminar la carpeta venv si fuese el caso de que este , eso es para que no genere nigun problema .
-- El archivo `agenda.db` contiene tus citas guardadas. Si no lo copias, tendrás una base de datos vacía.
+
 
 o bien ejecutar el setup,bat
 
