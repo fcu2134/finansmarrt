@@ -1,1 +1,10 @@
+# Entorno virtual
 venv/
+.venv/
+
+# Base de datos
+finansmart.db
+
+# Archivos de Python compilados
+__pycache__/
+*.pyc
