@@ -1,7 +1,5 @@
 
- ===========================
-finansmart- FLASK-python
-===========================
+** finansmart- FLASK-python **
 
 este documento explica como ejecutar el proyecto y si deseas cambiar de ordenador igualmente .v
 
@@ -47,7 +45,7 @@ Con el entorno virtual activado, ejecuta:
 Esto instalará Flask y todas las librerías necesarias.
 
 ----------------------------------
-6 Ejecutar la aplicación
+6 Ejecutar la aplicación 
 ----------------------------------
 Una vez activado el entorno virtual y con dependencias instaladas:
 
@@ -61,7 +59,7 @@ Una vez activado el entorno virtual y con dependencias instaladas:
 
 o bien ejecutar el setup,bat
 
- si te sale esto lo haces noma 
+ ❌si te sale esto NO haces ❌ 
 [notice] A new release of pip is available: 24.0 -> 25.1.1
 [notice] To update, run: python.exe -m pip install --upgrade pip
 
