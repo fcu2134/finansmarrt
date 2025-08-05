@@ -1,7 +1,5 @@
 
- ===========================
-finansmart- FLASK-python
-===========================
+** finansmart- FLASK-python **
 
 este documento explica como ejecutar el proyecto y si deseas cambiar de ordenador igualmente .v
 
