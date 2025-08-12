@@ -17,6 +17,10 @@ app.config['SECRET_KEY'] = 'secreto2'
 db.init_app(app)
 from modelos import Usuario, Categoria, Transaccion
 #esto crea una instancaidel manejador de sesiones del usuario ,conecta con la aplicacion flask,y define la vista que se mostrara primero
+@app.route('/')
+def home():
+    return redirect(url_for('login'))
+
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
