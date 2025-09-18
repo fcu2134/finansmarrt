@@ -76,8 +76,8 @@ def cerrar_sesion():
 @login_required
 def panel():
     transacciones = Transaccion.query.filter_by(usuario_id=current_user.id).all()
-    ingresos = sum(t.monto for t in transacciones if t.tipo == 'Ingreso')
-    egresos = sum(t.monto for t in transacciones if t.tipo == 'Egreso')
+    ingresos = int(sum(t.monto for t in transacciones if t.tipo == 'Ingreso'))
+    egresos = int(sum(t.monto for t in transacciones if t.tipo == 'Egreso'))
     saldo = ingresos - egresos
 
     from collections import defaultdict
@@ -87,10 +87,19 @@ def panel():
         if t.tipo == 'Egreso' and t.categoria:
             categorias_gasto[t.categoria.nombre] += t.monto
 
-    etiquetas = list(categorias_gasto.keys())
-    valores = list(categorias_gasto.values())
+   
+    labels = list(categorias_gasto.keys())
+    values = list(categorias_gasto.values())
 
-    return render_template('panel.html', ingresos=ingresos, egresos=egresos, saldo=saldo, etiquetas=etiquetas, valores=valores)
+    return render_template(
+        'panel.html',
+        ingresos=ingresos,
+        egresos=egresos,
+        saldo=saldo,
+        labels=labels,
+        values=values
+    )
+
 #esto muestra la lista de transacciones 
 @app.route('/transacciones')
 @login_required
@@ -205,6 +214,18 @@ def editar_transaccion(id):
         return redirect(url_for('panel'))
 
     return render_template('editar_transaccion.html', form=form)
+@app.route('/transacciones/eliminar/<int:id>', methods=['POST'])
+@login_required
+def eliminar_transaccion(id):
+    transaccion = Transaccion.query.get_or_404(id)
+    if transaccion.usuario_id != current_user.id:
+        flash("No tienes permiso para eliminar esta transacción.", "error")
+        return redirect(url_for('listar_transacciones'))
+    
+    db.session.delete(transaccion)
+    db.session.commit()
+    flash("Transacción eliminada.")
+    return redirect(url_for('listar_transacciones'))
 
 if __name__ == '__main__':
     with app.app_context():
